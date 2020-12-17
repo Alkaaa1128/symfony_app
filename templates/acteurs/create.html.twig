@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+ {% block title %}Création d'acteur{% endblock %}
+
+ {% block body %}
+
+<form method="POST">
+
+    <p>
+        <label for="nom">
+            Nom
+        </label>
+        <input type="text" name="nom" id="nom" />
+    </p>
+    <p>
+        <label for="prenom">
+            Prénom
+        </label>
+        <input type="text" name="prenom" id="prenom" />
+    </p>
+    <p>
+        <label for="date_naissance">
+            Date de naissance
+        </label>
+        <input type="date" min="1900" max="2021" step="1" name ="date_naissance" id="date_naissance" />
+    </p>
+    <p>
+        <label for="date_mort">
+            Date de mort
+        </label>
+        <input type="date" min="1900" max="2021" step="1" name ="date_mort" id="date_mort" />
+    </p>
+    <p>
+        <label for="photo">
+            Photo
+        </label>
+         <textarea name="photo" id="photo"></textarea>
+    </p>
+     <p>
+        <button type="submit">
+            Enregistrer
+        </button>
+    </p>
+    <p>
+        <label for="film">
+            Films dans lesquels l'acteur a joué
+        </label>
+        <select name="film" id="film">
+            {% for film in films %}
+            <option value="{{film.id}}">
+            {{film.titre}}
+            </option>
+        
+    {% endfor %}
+        </select>
+    </p>
+
+</form>
+
+{% endblock %}

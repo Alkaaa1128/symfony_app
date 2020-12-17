@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GenresController extends AbstractController
 {
     /**
-     * @Route("/genre", name="genre")
+     * @Route("/genres", name="genres")
      */
     public function index(): Response
     {
@@ -22,51 +24,79 @@ class GenresController extends AbstractController
         ]);
     }
         /**
-     * @Route("/genres/creation", name="films_create")
+     * @Route("/genres/creation", name="genres_create")
      */
     
     
      public function create(Request $request): Response
     {
             if($request->isMethod("POST")){
-               $titre= $request->request->get('titre');
-               $resume= $request->request->get('resume');
-               $annee_sortie= $request->request->get('annee_sortie');
-               $acteur= $request->request->get('acteur');
-               $affiche= $request->request->get('affiche');
-               $genre_id= $request->request->get('genre');
-
-               $genre = $this->getDoctrine()
-               ->getRepository(Genre::class)
-               ->find($genre_id);
-
+               $name= $request->request->get('name');
                
-
-                $film =  new Film;
-                $film->setTitre($titre);
-                $film->setResume($resume);
-                $film->setAnneeSortie($annee_sortie);  
-                //$film->setActeur($acteur);
-                $film->setGenre($genre);
-                $film->setAffiche($affiche);   
+                $genre = new Genre;
+                $genre -> setName($name);
                 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($film);
+                $em->persist($genre);
                 $em->flush();
 
 
-                return $this->redirectToRoute('films');
+                return $this->redirectToRoute('genres');
             
-
             } 
-            $genres = $this->getDoctrine()
-            ->getRepository(Genre::class)
-            ->findALL();
             
             return $this->render('genres/create.html.twig', [
-                    'controller_name' => 'FilmsController',
-                    'genres'           => $genres
+                    'controller_name' => 'GenresController'
                 ]);
+            
+    }
+     /**
+     * @Route("/genres/{id}/edition", name="genres_edit")
+     */
+    
+         public function edit($id, Request $request): Response
+    {
+                $genre = $this->getDoctrine()
+                ->getRepository(Genre::class)
+                ->find($id);
+             if($request->isMethod("POST")){
+                $name= $request->request->get('name');
+                $genre -> setName($name);
+
+                $em = $this->getDoctrine()->getManager();     
+                $em->flush();
+
+
+                return $this->redirectToRoute('genres');
+            
+            } 
+            
+            return $this->render('genres/edit.html.twig', [
+                    'controller_name' => 'GenresController',
+                    'genre' => $genre
+                ]);
+            
+    }
+
+    /**
+     * @Route("/genres/{id}/suppression", name="genres_delete")
+     */
+    
+    public function delete($id, Request $request): Response
+    {
+                $genre = $this->getDoctrine()
+                ->getRepository(Genre::class)
+                ->find($id);
+            
+
+                $em = $this->getDoctrine()->getManager();  
+                $em->remove($genre);
+                $em->flush();
+
+
+                return $this->redirectToRoute('genres');
+            
+             
             
     }
 }
