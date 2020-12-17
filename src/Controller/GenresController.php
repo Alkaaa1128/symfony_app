@@ -2,34 +2,31 @@
 
 namespace App\Controller;
 
-use App\Entity\Film;
-use App\Entity\Genre;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FilmsController extends AbstractController
+class GenresController extends AbstractController
 {
     /**
-     * @Route("/films", name="films")
+     * @Route("/genre", name="genre")
      */
     public function index(): Response
     {
-        $films = $this->getDoctrine()
-            ->getRepository(Film::class)
+        $genres = $this->getDoctrine()
+            ->getRepository(Genre::class)
             ->findALL();
-
-        return $this->render('films/index.html.twig', [
-            'controller_name' => 'FilmsController',
-            'films'           => $films
+        return $this->render('genres/index.html.twig', [
+            'controller_name' => 'GenresController',
+            'genres' => $genres
         ]);
     }
-
-     /**
-     * @Route("/films/creation", name="films_create")
+        /**
+     * @Route("/genres/creation", name="films_create")
      */
-    public function create(Request $request): Response
+    
+    
+     public function create(Request $request): Response
     {
             if($request->isMethod("POST")){
                $titre= $request->request->get('titre');
@@ -66,7 +63,7 @@ class FilmsController extends AbstractController
             ->getRepository(Genre::class)
             ->findALL();
             
-            return $this->render('films/create.html.twig', [
+            return $this->render('genres/create.html.twig', [
                     'controller_name' => 'FilmsController',
                     'genres'           => $genres
                 ]);
