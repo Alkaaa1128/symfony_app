@@ -19,6 +19,32 @@
         <input type="number" min="1900" max="2021" step="1" name ="annee_sortie" id="annee_sortie" />
     </p>
     <p>
+        <label for="acteur">
+            Acteur
+        </label>
+        <textarea name="acteur" id="acteur"></textarea>
+    </p>
+    <p>
+        <label for="genre">
+            Genre
+        </label>
+        <select name="genre" id="genre">
+            {% for genre in genres %}
+            <option value="{{genre.id}}">
+                {{genre.name}}
+            </option>
+        
+    {% endfor %}
+        </select>
+    </p>
+    <p>
+        <label for="affiche">
+            Affiche
+        </label>
+        <textarea name="affiche" id="affiche"></textarea>
+    </p>
+
+    <p>
         <button type="submit">
             Enregistrer
         </button>

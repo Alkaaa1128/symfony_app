@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Film;
+use App\Entity\Genre;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,22 +35,33 @@ class FilmsController extends AbstractController
                $titre= $request->request->get('titre');
                $resume= $request->request->get('resume');
                $annee_sortie= $request->request->get('annee_sortie');
+               $acteur= $request->request->get('acteur');
+               $genre= $request->$request->get('genre');
+               $affiche= $request>$request->get('affiche');
 
                 $film =  new Film;
                 $film->setTitre($titre);
                 $film->setResume($resume);
-                $film->setAnneeSortie($annee_sortie);       
+                $film->setAnneeSortie($annee_sortie);  
+                //$film->setActeur($acteur);
+                $film->setGenre($genre);
+                $film->setAffiche($affiche);   
                 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($film);
                 $em->flush();
 
+
                 return $this->redirectToRoute('films');
             
 
             } 
+            $genres = $this->getDoctrine()
+            ->getRepository(Genre::class)
+            ->findALL();
             return $this->render('films/create.html.twig', [
                     'controller_name' => 'FilmsController',
+                    'genres'           => $genres
                 ]);
             
     }

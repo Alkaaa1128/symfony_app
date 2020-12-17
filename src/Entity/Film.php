@@ -32,6 +32,18 @@ class Film
      */
     private $resume;
 
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $affiche;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="films")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $genre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +81,32 @@ class Film
     public function setResume(string $resume): self
     {
         $this->resume = $resume;
+
+        return $this;
+    }
+
+    
+
+    public function getAffiche(): ?string
+    {
+        return $this->affiche;
+    }
+
+    public function setAffiche(string $affiche): self
+    {
+        $this->affiche = $affiche;
+
+        return $this;
+    }
+
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?Genre $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }
