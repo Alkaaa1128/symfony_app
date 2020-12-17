@@ -18,19 +18,19 @@ class Film
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
-    private $titre;
-
-    /**
-     * @ORM\Column(type="string", length=55)
-     */
-    private $text;
+    private $Titre;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $annee_sortie;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $resume;
 
     public function getId(): ?int
     {
@@ -39,24 +39,12 @@ class Film
 
     public function getTitre(): ?string
     {
-        return $this->titre;
+        return $this->Titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre(string $Titre): self
     {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    public function setText(string $text): self
-    {
-        $this->text = $text;
+        $this->Titre = $Titre;
 
         return $this;
     }
@@ -72,4 +60,17 @@ class Film
 
         return $this;
     }
+
+    public function getResume(): ?string
+    {
+        return $this->resume;
+    }
+
+    public function setResume(string $resume): self
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
+
 }
