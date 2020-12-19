@@ -17,7 +17,7 @@ class ActeursController extends AbstractController
     {
         /*rajout  */
         $acteurs = $this->getDoctrine()
-            ->getRepository(Acteurs::class)
+            ->getRepository(Acteur::class)
             ->findALL();
         /*rajout  */
 

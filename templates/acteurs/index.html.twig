@@ -31,9 +31,12 @@
 
 <div>
     {% for acteur in acteurs %}
-        <h2>#{{ acteur.id }} : {{ acteur.nom }}</h2>
+        <h2>#{{ acteur.id }} : {{ acteur.nom }} {{ acteur.prenom }}</h2>
         <h3>Naissance : {{ acteur.date_naissance }}</h3>
-        <h3>Mort : {{ acteur.date_mort }}</h3>
+        <pre>
+            {{ dump(acteur) }}
+        </pre>
+        {#<h3>Mort : #{{ acteur.date_mort }}</h3>#}
             
        
             <p>Photo : {{acteur.photo}}</p>

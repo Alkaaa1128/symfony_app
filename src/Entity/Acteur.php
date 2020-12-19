@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ActeurRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,7 +34,7 @@ class Acteur
     private $date_naissance;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $date_mort;
 
@@ -71,7 +72,7 @@ class Acteur
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getDateNaissance(): ?DateTimeInterface
     {
         return $this->date_naissance;
     }
