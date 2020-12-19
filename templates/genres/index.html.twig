@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FilmsController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ url('genres_create') }}">Nouveau genre</a>
+
+<div>
+    {% for genre in genres %}
+        <h2>#{{ genre.id }} : {{ genre.name }}</h2>
+        <a href="{{ url('genres_edit', {'id' : genre.id }) }}">Editer</a>
+        {% if genre.films|length == 0 %}
+        <br/>
+        <a href="{{ url('genres_delete', {'id' : genre.id }) }}">Supprimer</a>
+        {% endif %}
+        
+        
+        {% endfor %}
+</div>
+
+{% endblock %}

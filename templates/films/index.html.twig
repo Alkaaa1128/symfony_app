@@ -10,10 +10,12 @@
     {% for film in films %}
         <h2>#{{ film.id }} : {{ film.titre }}</h2>
         <h3>Sortie : {{ film.anneeSortie }}</h3>
-        <p>{{ film.resume }}</p>
-        {# <p>Acteur : {{film.acteur}}</p> #}
-        <p>Genre : {{ film.genre }}</p>
-        <p>Affiche : {{film.affiche}}</p>
+            <p>{{ film.resume }}</p>
+       {# <p>Acteur : {{film.acteur}}</p> #}
+        {% if film.genre is not null %}
+            <p>Genre : {{ film.genre.name }}</p>
+        {% endif %}
+            <p>Affiche : {{film.affiche}}</p>
         <hr />
     {% endfor %}
 </div>

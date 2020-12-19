@@ -1,0 +1,45 @@
+{#} {% extends 'base.html.twig' %}
+
+{% block title %}Hello ActeursController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ url('acteurs_create') }}">Nouvel acteur</a>
+
+<div>
+    {% for acteur in acteurs %}
+        <h2>#{{ acteur.id }} : {{ acteur.nom }}</h2>
+        <a href="{{ url('acteurs_edit', {'id' : acteur.id }) }}">Editer</a>
+        {% if acteur.films|length == 0 %}
+        <br/>
+        <a href="{{ url('acteurs_delete', {'id' : acteur.id }) }}">Supprimer</a>
+        {% endif %}
+        
+        
+        {% endfor %}
+</div>
+
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ActeursController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ url('acteurs_create') }}">Nouvel acteur</a>
+
+<div>
+    {% for acteur in acteurs %}
+        <h2>#{{ acteur.id }} : {{ acteur.nom }}</h2>
+        <h3>Naissance : {{ acteur.date_naissance }}</h3>
+        <h3>Mort : {{ acteur.date_mort }}</h3>
+            
+       
+            <p>Photo : {{acteur.photo}}</p>
+        <hr />
+    {% endfor %}
+</div>
+
+{% endblock %}
+

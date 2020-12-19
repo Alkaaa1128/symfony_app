@@ -36,9 +36,14 @@ class FilmsController extends AbstractController
                $resume= $request->request->get('resume');
                $annee_sortie= $request->request->get('annee_sortie');
                $acteur= $request->request->get('acteur');
-               $genre_id= $request->request->get('genre');
                $affiche= $request->request->get('affiche');
+               $genre_id= $request->request->get('genre');
 
+               $genre = $this->getDoctrine()
+               ->getRepository(Genre::class)
+               ->find($genre_id);
+
+               
 
                 $film =  new Film;
                 $film->setTitre($titre);
@@ -60,6 +65,7 @@ class FilmsController extends AbstractController
             $genres = $this->getDoctrine()
             ->getRepository(Genre::class)
             ->findALL();
+            
             return $this->render('films/create.html.twig', [
                     'controller_name' => 'FilmsController',
                     'genres'           => $genres

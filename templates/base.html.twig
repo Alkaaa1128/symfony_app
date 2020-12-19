@@ -6,6 +6,10 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <a href="{{ url('films') }}">Liste de film</a>
+        <a href="{{ url('genres') }}">Liste de genre</a>
+        <a href="{{ url('acteurs') }}">Liste d'acteurs</a>
+        <hr/>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
