@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Acteur;
+use App\Entity\Film;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,10 +39,20 @@ class ActeursController extends AbstractController
     {
             if($request->isMethod("POST")){
                $nom= $request->request->get('nom');
+               $prenom= $request->request->get('prenom');
+               $dateNaissance= $request->request->get('date_naissance');
+               $dateNaissance = new \DateTime($dateNaissance);
+               $dateMort= $request->request->get('date_mort');
+               $dateMort = new \DateTime($dateMort);
+
+               
                
                 $acteur = new Acteur;
                 $acteur -> setNom($nom);
-                
+                $acteur -> setPrenom($prenom);
+                $acteur -> setDateNaissance($dateNaissance);
+                $acteur -> setDateMort($dateMort);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($acteur);
                 $em->flush();
@@ -53,6 +64,7 @@ class ActeursController extends AbstractController
             
             return $this->render('acteurs/create.html.twig', [
                     'controller_name' => 'ActeursController'
+
                 ]);
             
     }
@@ -67,7 +79,10 @@ class ActeursController extends AbstractController
                 ->find($id);
              if($request->isMethod("POST")){
                 $nom= $request->request->get('nom');
-                $nom -> setName($nom);
+                $acteur -> setNom($nom);
+                $prenom= $request->request->get('prenom');
+                $acteur -> setPrenom($prenom);
+                
 
                 $em = $this->getDoctrine()->getManager();     
                 $em->flush();

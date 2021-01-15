@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FilmRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,10 +41,22 @@ class Film
     private $affiche;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="films")
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="Films")
      * @ORM\JoinColumn(nullable=false)
      */
     private $genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="films")
+     */
+    private $acteurs;
+
+    public function __construct()
+    {
+        $this->acteurs = new ArrayCollection();
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -110,5 +124,30 @@ class Film
 
         return $this;
     }
+
+    /**
+     * @return Collection|Acteur[]
+     */
+    public function getActeurs(): Collection
+    {
+        return $this->acteurs;
+    }
+
+    public function addActeur(Acteur $acteur): self
+    {
+        if (!$this->acteurs->contains($acteur)) {
+            $this->acteurs[] = $acteur;
+        }
+
+        return $this;
+    }
+
+    public function removeActeur(Acteur $acteur): self
+    {
+        $this->acteurs->removeElement($acteur);
+
+        return $this;
+    }
+
 
 }

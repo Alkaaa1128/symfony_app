@@ -30,7 +30,15 @@
         <label for="acteur">
             Acteur
         </label>
-        <textarea name="acteur" id="acteur"></textarea>
+        <select name="acteur[]" id="acteur" multiple>
+            {% for acteur in acteurs %}
+            <option value="{{acteur.id}}">
+            {{acteur.nom}}
+            {{acteur.prenom}}
+            </option>
+        
+    {% endfor %}
+        </select>
     </p>
     <p>
         <label for="genre">
@@ -44,6 +52,7 @@
         
     {% endfor %}
         </select>
+
     </p>
     <p>
         <label for="affiche">

@@ -41,19 +41,6 @@
             Enregistrer
         </button>
     </p>
-    <p>
-        <label for="film">
-            Films dans lesquels l'acteur a joué
-        </label>
-        <select name="film" id="film">
-            {% for film in films %}
-            <option value="{{film.id}}">
-            {{film.titre}}
-            </option>
-        
-    {% endfor %}
-        </select>
-    </p>
 
 </form>
 

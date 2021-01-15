@@ -32,17 +32,32 @@
 <div>
     {% for acteur in acteurs %}
         <h2>#{{ acteur.id }} : {{ acteur.nom }} {{ acteur.prenom }}</h2>
-        <h3>Naissance : {{ acteur.date_naissance }}</h3>
+        <h3>Naissance : {{ acteur.dateNaissance|date("m/d/Y") }}</h3>
         <pre>
             {{ dump(acteur) }}
         </pre>
-        {#<h3>Mort : #{{ acteur.date_mort }}</h3>#}
+        <h3>Mort : {{ acteur.dateMort|date("m/d/Y") }}</h3>
             
        
             <p>Photo : {{acteur.photo}}</p>
+            <a href="{{ url('acteurs_edit', {'id' : acteur.id }) }}">Editer</a>
+            <a href="{{ url('acteurs_delete', {'id' : acteur.id }) }}">Supprimer</a>
         <hr />
     {% endfor %}
 </div>
 
 {% endblock %}
 
+
+{#<div>
+    {% for genre in genres %}
+        <h2>#{{ genre.id }} : {{ genre.name }}</h2>
+        <a href="{{ url('genres_edit', {'id' : genre.id }) }}">Editer</a>
+        {% if genre.films|length == 0 %}
+        <br/>
+        <a href="{{ url('genres_delete', {'id' : genre.id }) }}">Supprimer</a>
+        {% endif %}
+        
+        
+        {% endfor %}
+</div>#}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+ {% block title %}Edition de l'acteur #{{acteur.id}}{% endblock %}
+
+ {% block body %}
+
+<form method="POST">
+
+    <p>
+        <label for="nom">
+            Nom
+        </label>
+        <input type="text" name="nom" id="nom" value="{{acteur.nom}}" />
+    </p>
+
+    <p>
+        <label for="name">
+            Prenom
+        </label>
+        <input type="text" name="prenom" id="name" value="{{acteur.prenom}}" />
+    </p>
+   
+
+    <p>
+        <button type="submit">
+            Enregistrer
+        </button>
+    </p>
+
+</form>
+
+{% endblock %}
