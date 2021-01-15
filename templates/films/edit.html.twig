@@ -10,15 +10,20 @@
         <label for="name">
             Genre
         </label>
-        <input type="text" name="name" id="name" value="{{genre.name}}" />
+        <input type="text" name="name" id="name" value="{{film.genre.name}}" />
     </p>
 
     <p>
         <label for="name">
             Acteur
         </label>
-        <input type="text" name="name" id="name" value="{{acteur.name}}" />
+        {% for acteur in film.acteurs %}
+          <input type="text" name="name" id="name" value="{{acteur.nom}}" />  
+        {% endfor %}
+        
     </p>
+
+
    
 
     <p>

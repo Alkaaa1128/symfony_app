@@ -96,14 +96,14 @@ class FilmsController extends AbstractController
                 ->getRepository(Film::class)
                 ->find($id);
              if($request->isMethod("POST")){
-                $name= $request->request->get('titre');
-                $film -> setName($name);
+                $titre= $request->request->get('titre');
+                $film -> setTitre($titre);
 
                 $em = $this->getDoctrine()->getManager();     
                 $em->flush();
 
 
-                return $this->redirectToRoute('films');
+                return $this->redirectToRoute('films/index.html.twig');
             
             } 
             
