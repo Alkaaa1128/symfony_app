@@ -22,9 +22,7 @@
             <option value="{{acteur.id}}"
                 {% if film.acteurs.contains(acteur) %}
                     selected
-            
                 {% endif %}
-            
             >
             {{acteur.nom}}
             {{acteur.prenom}}
@@ -34,30 +32,21 @@
         </select>
     </p>
 
-{#
+
     <p>
         <label for="genre">
             Genre
         </label>
         <select name="genre" id="genre">
             {% for genre in genres %}
-            <option value="{{genre.id}}"
-            {% if film.genre.contains(genre) %}
-                    selected
-            
-                {% endif %}
-            
-            
-            >
+            <option value="{{genre.id}}">
             {{genre.name}}
             </option>
         
     {% endfor %}
         </select>
 
-    </p>#}
-
-
+    </p>
    
 
     <p>

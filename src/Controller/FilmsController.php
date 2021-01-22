@@ -100,10 +100,10 @@ class FilmsController extends AbstractController
                 ->getRepository(Acteur::class)
                 ->findALL();
 
-                /*
-                $genre = $this->getDoctrine()
+                
+                $genres = $this->getDoctrine()
                 ->getRepository(Genre::class)
-                ->findALL();*/
+                ->findALL();
 
             
              if($request->isMethod("POST")){
@@ -111,9 +111,14 @@ class FilmsController extends AbstractController
                 $film -> setTitre($titre);
                 $acteurs = $request->request->get('acteur');
 
-                //$genre = $request->request->get('genre');
+                $genres = $request->request->get('genre');
+
+                /*
+
+                $film ->setGenre($genres);*/
 
                 $film->getActeurs()->clear();
+                
 
                 foreach ($acteurs as $id){
                     $acteur = $this->getDoctrine()
@@ -122,7 +127,16 @@ class FilmsController extends AbstractController
                     $film -> addActeur($acteur);
 
                 }
+
+                /*foreach ($genres as $id){
+                    $genre = $this->getDoctrine()
+                    ->getRepository(Genre::class)
+                    ->find($id);
+                    $film -> setGenre($genre);
+
+                }
                 
+                $film->getGenre()->clear();*/
 
                 $em = $this->getDoctrine()->getManager();     
                 $em->flush();
@@ -135,7 +149,7 @@ class FilmsController extends AbstractController
                     'controller_name' => 'FilmsController',
                     'film' => $film,
                     'acteurs' => $acteurs,
-                    //'genre' => $genre,
+                    'genres' => $genres,
                 ]);
             
     }
