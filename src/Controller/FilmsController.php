@@ -95,21 +95,47 @@ class FilmsController extends AbstractController
                 $film = $this->getDoctrine()
                 ->getRepository(Film::class)
                 ->find($id);
+
+                $acteurs = $this->getDoctrine()
+                ->getRepository(Acteur::class)
+                ->findALL();
+
+                /*
+                $genre = $this->getDoctrine()
+                ->getRepository(Genre::class)
+                ->findALL();*/
+
+            
              if($request->isMethod("POST")){
                 $titre= $request->request->get('titre');
                 $film -> setTitre($titre);
+                $acteurs = $request->request->get('acteur');
+
+                //$genre = $request->request->get('genre');
+
+                $film->getActeurs()->clear();
+
+                foreach ($acteurs as $id){
+                    $acteur = $this->getDoctrine()
+                    ->getRepository(Acteur::class)
+                    ->find($id);
+                    $film -> addActeur($acteur);
+
+                }
+                
 
                 $em = $this->getDoctrine()->getManager();     
                 $em->flush();
 
-
-                return $this->redirectToRoute('films/index.html.twig');
+                return $this->redirectToRoute('films');
             
             } 
             
             return $this->render('films/edit.html.twig', [
                     'controller_name' => 'FilmsController',
-                    'film' => $film
+                    'film' => $film,
+                    'acteurs' => $acteurs,
+                    //'genre' => $genre,
                 ]);
             
     }

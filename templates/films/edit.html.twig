@@ -7,21 +7,55 @@
 <form method="POST">
 
     <p>
-        <label for="name">
-            Genre
+        <label for="genre">
+            Titre du film
         </label>
-        <input type="text" name="name" id="name" value="{{film.genre.name}}" />
+        <input type="text" name="titre" id="name" value="{{film.genre.name}}" />
     </p>
 
-    <p>
-        <label for="name">
+   <p>
+        <label for="acteur">
             Acteur
         </label>
-        {% for acteur in film.acteurs %}
-          <input type="text" name="name" id="name" value="{{acteur.nom}}" />  
-        {% endfor %}
+        <select name="acteur[]" id="acteur" multiple>
+            {% for acteur in acteurs %}
+            <option value="{{acteur.id}}"
+                {% if film.acteurs.contains(acteur) %}
+                    selected
+            
+                {% endif %}
+            
+            >
+            {{acteur.nom}}
+            {{acteur.prenom}}
+            </option>
         
+    {% endfor %}
+        </select>
     </p>
+
+{#
+    <p>
+        <label for="genre">
+            Genre
+        </label>
+        <select name="genre" id="genre">
+            {% for genre in genres %}
+            <option value="{{genre.id}}"
+            {% if film.genre.contains(genre) %}
+                    selected
+            
+                {% endif %}
+            
+            
+            >
+            {{genre.name}}
+            </option>
+        
+    {% endfor %}
+        </select>
+
+    </p>#}
 
 
    

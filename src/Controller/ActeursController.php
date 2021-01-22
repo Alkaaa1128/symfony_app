@@ -45,8 +45,6 @@ class ActeursController extends AbstractController
                $dateMort= $request->request->get('date_mort');
                $dateMort = new \DateTime($dateMort);
 
-               
-               
                 $acteur = new Acteur;
                 $acteur -> setNom($nom);
                 $acteur -> setPrenom($prenom);
